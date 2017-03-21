@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout layout;
 
     PropertyUtil propertyUtil;
+    public static final String SAHRED_FILE = "aaa.prop";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveSetting(View view){
         // 1. Preference 생성하기
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(SAHRED_FILE,Context.MODE_PRIVATE);
+        //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         // 2. SharedPreference에 값을 입력하기 위해서는 에디터를 통해서만 가능
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -58,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadSetting(){
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref = getSharedPreferences(SAHRED_FILE,Context.MODE_PRIVATE);
+        //SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
 
         // 프로퍼티 가져오기
         String email = sharedPref.getString("email", "");
