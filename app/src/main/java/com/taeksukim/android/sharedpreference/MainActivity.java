@@ -20,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
     EditText editName;
     Switch switchShuffle;
 
+    PropertyUtil propertyUtil;
+
     RelativeLayout layout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        propertyUtil = propertyUtil.getInstance(this);
 
         internalStorePath = getFilesDir().getAbsolutePath();
 
@@ -33,20 +37,21 @@ public class MainActivity extends AppCompatActivity {
         layout = (RelativeLayout) findViewById(R.id.layout2);
 
         // firstOpen 체크가 되어 있으면 도움말 레이아웃을 달아준다.
-        if("false".equals(getProperty("firstOpen"))){
+        if("false".equals(propertyUtil.getProperty("firstOpen"))){
             layout.setVisibility(View.GONE);
         }
 
     }
 
-    public void closeHelp(View view){
-        layout.setVisibility(View.GONE);
-        saveProperty("firstOpen", "false");
-    }
-
     public void saveSetting(View view){
 
     }
+
+    public void closeHelp(View view){
+        layout.setVisibility(View.GONE);
+        propertyUtil.saveProperty("firstOpen", "false");
+    }
+
 
     public void saveProperty(String key, String value){
         Properties prop = new Properties();
